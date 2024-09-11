@@ -6,9 +6,7 @@ def extract_last_name(full_name):
     return full_name.split()[-1]
 
 
-def print_director():
-    lists = pd.read_excel("lists.xlsx", dtype=str)
-
+def print_director(lists):
     box_office_directors = list(lists["Box Office Director"])
     box_office_directors_separated = []
 

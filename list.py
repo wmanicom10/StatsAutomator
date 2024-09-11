@@ -1,9 +1,7 @@
 import pandas as pd
 
 
-def print_list(box_office_titles, box_office_years):
-    lists = pd.read_excel("lists.xlsx", dtype=str)
-
+def print_list(lists, box_office_titles, box_office_years):
     lists_dict = {
         "one_million": {
             "titles": list(lists["One Million Title"]),
