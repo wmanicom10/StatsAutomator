@@ -32,6 +32,11 @@ def print_list(lists, box_office_titles, box_office_years):
             "titles": list(lists["Letterboxd Title"]),
             "years": list(lists["Letterboxd Year"]),
             "count": 0
+        },
+        "most_watched": {
+            "titles": list(lists["Most Watched Title"]),
+            "years": list(lists["Most Watched Year"]),
+            "count": 0
         }
     }
 
@@ -51,4 +56,5 @@ def print_list(lists, box_office_titles, box_office_years):
     print("Number of films in the Letterboxd Three Million Watched Club: " + str(lists_dict["three_million"]["count"]))
     print("Number of films in the Letterboxd Four Million Watched Club: " + str(lists_dict["four_million"]["count"]))
     print("Number of films in the IMDb Top 250: " + str(lists_dict["imdb"]["count"]))
-    print("Number of films in the Letterboxd Top 250: " + str(lists_dict["letterboxd"]["count"]) + "\n")
+    print("Number of films in the Letterboxd Top 250: " + str(lists_dict["letterboxd"]["count"]))
+    print("Number of films in the Letterboxd 1000 Most Watched Films List: " + str(lists_dict["most_watched"]["count"]) + "\n")
