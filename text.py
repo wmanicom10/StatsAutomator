@@ -12,11 +12,23 @@ def print_header():
     print("STATS\n")
 
 
-def print_rating():
-    print("Highest rated film in the list")
-    print("The Lord of the Rings: The Return of the King (4.51)\n")
-    print("Lowest rated film in the list")
-    print("Transformers: Age of Extinction (2.05)\n")
+def print_actor():
+    print("Actors with 8+ films in the list")
+    print("Warwick Davis (12)")
+    print("Samuel L. Jackson (10)")
+    print("Andy Serkis (9)")
+    print("Benedict Cumberbatch (8)")
+    print("Robert Downey Jr. (8)")
+    print("Chris Pratt (8)")
+    print("Alan Rickman (8)")
+    print("Emma Watson (8)\n")
+
+
+def print_popular():
+    print("Most popular film in the list")
+    print("Barbie (2023)\n")
+    print("Most obscure film in the list")
+    print("Hi, Mom (2021)\n")
 
 
 def print_billion():
