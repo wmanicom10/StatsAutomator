@@ -3,9 +3,10 @@ from director import print_director
 from franchise import print_franchise
 from decade import print_decade
 from year import print_year
-from rating import print_list_order
+from list_order import print_list_order
 from list import print_list
 from oscar import print_best_picture, print_best_animated_feature, print_best_picture_nominees
+from billion import print_num_of_billions
 import text as text
 
 lists = pd.read_excel("lists.xlsx", dtype=str)
@@ -28,11 +29,11 @@ if option == "1":
     print_list_order(1)
     print_list_order(2)
     print_list(lists, box_office_titles, box_office_years)
-    text.print_billion(1)
+    print_num_of_billions()
     print_best_picture(box_office_titles, box_office_years)
     print_best_animated_feature(box_office_titles, box_office_years)
-    text.print_length(1)
-    text.print_release(1)
+    print_list_order(3)
+    print_list_order(4)
 elif option == "2":
     box_office_titles = list(lists["2024 Box Office Title"])
     box_office_years = list(lists["2024 Box Office Year"])
@@ -40,7 +41,7 @@ elif option == "2":
     text.print_actor(2)
     text.print_rating(2)
     print_list(lists, box_office_titles, box_office_years)
-    text.print_billion(2)
+    text.print_billion()
     print_best_picture_nominees(box_office_titles, box_office_years)
     text.print_length(2)
     text.print_release(2)
