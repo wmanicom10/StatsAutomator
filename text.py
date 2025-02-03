@@ -6,8 +6,8 @@ def print_header(option):
         print("List of the Top 100 All-Time Worldwide Box Office films, based on The Numbers\n")
     elif option == 2:
         print("List of the Top 50 2024 Worldwide Box Office films, based on The Numbers\n")
-    else:
-        print("Invalid option")
+    elif option == 3:
+        print("List of the Top 50 2025 Worldwide Box Office films, based on The Numbers\n")
 
     formatted_date = datetime.now().strftime("%m/%d/%y")
     print("Last Update - " + formatted_date + "\n")
@@ -35,6 +35,8 @@ def print_actor(option):
         print("Catherine O'Hara (3)")
         print("Kiernan Shipka (3)")
         print("Aaron Taylor-Johnson (3)\n")
+    elif option == 3:
+        print("Actors with 3+ films in the list\n")
 
 
 def print_billion(option):
@@ -56,6 +58,11 @@ def print_length(option):
         print("Dune: Part Two - 2 hr 47 min\n")
         print("Shortest film in the list")
         print("Tarot - 1 hr 32 min\n")
+    elif option == 3:
+        print("Longest film in the list")
+        print("Den of Thieves 2: Pantera - 2 hr 24 min\n")
+        print("Shortest film in the list")
+        print("Flight Risk - 1 hr 31 min\n")
 
 
 def print_release(option):
@@ -69,10 +76,21 @@ def print_release(option):
         print("Night Swim\n")
         print("Newest film in the list")
         print("Sonic the Hedgehog 3")
+    elif option == 3:
+        print("Oldest film in the list")
+        print("Den of Thieves 2: Pantera\n")
+        print("Newest film in the list")
+        print("Flight Risk")
 
 
-def print_rating():
-    print("Highest rated film in the list")
-    print("Dune: Part Two (4.41)\n")
-    print("Lowest rated film in the list")
-    print("Madame Web (1.48)\n")
+def print_rating(option):
+    if option == 2:
+        print("Highest rated film in the list")
+        print("Dune: Part Two (4.41)\n")
+        print("Lowest rated film in the list")
+        print("Madame Web (1.48)\n")
+    elif option == 3:
+        print("Highest rated film in the list")
+        print("One of Them Days (3.62)\n")
+        print("Lowest rated film in the list")
+        print("Flight Risk (2.21)\n")
