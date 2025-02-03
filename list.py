@@ -1,12 +1,9 @@
-import pandas as pd
-
-
 def print_list(lists, box_office_titles, box_office_years):
     lists_dict = {
         "one_million": {
             "titles": list(lists["One Million Title"]),
             "years": list(lists["One Million Year"]),
-            "count": 0
+            "count": 0,
         },
         "two_million": {
             "titles": list(lists["Two Million Title"]),
@@ -26,12 +23,12 @@ def print_list(lists, box_office_titles, box_office_years):
         "imdb": {
             "titles": list(lists["IMDb Title"]),
             "years": list(lists["IMDb Year"]),
-            "count": 0
+            "count": 0,
         },
         "letterboxd": {
             "titles": list(lists["Letterboxd Title"]),
             "years": list(lists["Letterboxd Year"]),
-            "count": 0
+            "count": 0,
         },
         "most_watched": {
             "titles": list(lists["Most Watched Title"]),
@@ -55,6 +52,6 @@ def print_list(lists, box_office_titles, box_office_years):
     print("Number of films in the Letterboxd Two Million Watched Club: " + str(lists_dict["two_million"]["count"]))
     print("Number of films in the Letterboxd Three Million Watched Club: " + str(lists_dict["three_million"]["count"]))
     print("Number of films in the Letterboxd Four Million Watched Club: " + str(lists_dict["four_million"]["count"]))
+    print("Number of films in the Letterboxd 1000 Most Watched Films List: " + str(lists_dict["most_watched"]["count"]))
     print("Number of films in the IMDb Top 250: " + str(lists_dict["imdb"]["count"]))
-    print("Number of films in the Letterboxd Top 250: " + str(lists_dict["letterboxd"]["count"]))
-    print("Number of films in the Letterboxd 1000 Most Watched Films List: " + str(lists_dict["most_watched"]["count"]) + "\n")
+    print("Number of films in the Letterboxd Top 250: " + str(lists_dict["letterboxd"]["count"]) + "\n")
