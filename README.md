@@ -1,1 +1,1 @@
-This is a Python project to automate the stats for my [Top 100 All-Time Worldwide Box Office](https://boxd.it/xEjVy) Letterboxd list.
+This is a Python project to automate the stats for my [Top 100 All-Time Worldwide Box Office](https://boxd.it/xEjVy) and [2024 Top 50 Box Office](https://letterboxd.com/will1011/list/2024-worldwide-box-office-top-50/) Letterboxd lists
