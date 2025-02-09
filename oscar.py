@@ -44,18 +44,16 @@ def print_best_animated_feature(box_office_titles, box_office_years):
 def print_best_picture_nominees(box_office_titles, box_office_years):
     best_picture_nominees_titles = list(lists["Best Picture Nominated Name"])
 
-    best_picture_nominees_counter = 0
     best_picture_nominees = []
 
     for i in range(50):
         if box_office_titles[i] in best_picture_nominees_titles:
             if (box_office_titles[i], box_office_years[i]) not in best_picture_nominees:
                 best_picture_nominees.append(box_office_titles[i])
-                best_picture_nominees_counter += 1
 
     best_pictures_sorted = sorted(best_picture_nominees, key=lambda x: remove_articles(x[0]))
 
-    print("Number of Best Picture Nominees in the list: " + str(best_picture_nominees_counter))
+    print("Best Picture Nominees in the list: ")
     print(', '.join(best_pictures_sorted) + "\n")
 
 

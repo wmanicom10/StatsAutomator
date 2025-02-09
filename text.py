@@ -8,6 +8,12 @@ def print_header(option):
         print("List of the Top 50 2024 Worldwide Box Office films, based on The Numbers\n")
     elif option == 3:
         print("List of the Top 50 2025 Worldwide Box Office films, based on The Numbers\n")
+    elif option == 4:
+        current_date = datetime.now()
+        formatted_date = current_date.strftime("%B %-d, %Y")
+        print("This is a list of the films seen by 5,000,000 individual Letterboxd members, as of " + formatted_date + "\n")
+        print("STATS:\n")
+        return
 
     formatted_date = datetime.now().strftime("%m/%d/%y")
     print("Last Update - " + formatted_date + "\n")
@@ -19,16 +25,10 @@ def print_header(option):
 
 def print_actor(option):
     if option == 1:
-        print("Actors with 8+ films in the list")
+        print("Actors with 9+ films in the list")
         print("Warwick Davis (12)")
         print("Samuel L. Jackson (10)")
-        print("Andy Serkis (9)")
-        print("Benedict Cumberbatch (8)")
-        print("Robert Downey Jr. (8)")
-        print("Chris Pratt (8)")
-        print("Alan Rickman (8)")
-        print("Alan Tudyk (8)")
-        print("Emma Watson (8)\n")
+        print("Andy Serkis (9)\n")
     elif option == 2:
         print("Actors with 3+ films in the list")
         print("Blake Lively (3)")
@@ -48,7 +48,7 @@ def print_length(option):
         print("Longest film in the list")
         print("Dune: Part Two - 2 hr 47 min\n")
         print("Shortest film in the list")
-        print("Tarot - 1 hr 32 min\n")
+        print("Kung Fu Panda 4 - 1 hr 34 min\n")
     elif option == 3:
         print("Longest film in the list")
         print("Den of Thieves 2: Pantera - 2 hr 24 min\n")

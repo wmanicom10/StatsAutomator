@@ -18,8 +18,8 @@ def print_franchise(box_office_titles):
         sorted(franchise_counts.items(), key=lambda item: (-item[1], item[0]))
     )
 
-    print("Franchises with 3+ films in the list")
+    print("Franchises with 5+ films in the list")
     for franchise, count in sorted_franchise_counts.items():
-        if count >= 3:
+        if count >= 5:
             print(f"{franchise} ({count})")
     print("")

@@ -25,9 +25,9 @@ def print_director(lists):
         key=lambda x: (-x[1], extract_last_name(x[0]))
     )
 
-    print("Directors with 3+ films in the list")
+    print("Directors with 4+ films in the list")
     for i in range(len(sorted_directors)):
-        if sorted_directors[i][1] > 2:
+        if sorted_directors[i][1] > 3:
             print(sorted_directors[i][0] + " (" + str(sorted_directors[i][1]) + ")")
         else:
             break

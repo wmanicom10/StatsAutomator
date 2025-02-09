@@ -23,6 +23,14 @@ def print_list_order(option):
         url += "https://letterboxd.com/will1011/list/all-time-worldwide-box-office-top-100/by/release-earliest/"
         highest_text += "Oldest film in the list"
         lowest_text += "Newest film in the list"
+    elif option == 5:
+        url += ""
+        highest_text += "Highest Rated Film"
+        lowest_text += "Lowest Rated Film"
+    elif option == 6:
+        url += ""
+        highest_text += "Oldest Film"
+        lowest_text += "Newest Film"
 
     response = requests.get(url)
 
