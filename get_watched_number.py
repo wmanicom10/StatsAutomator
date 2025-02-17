@@ -37,7 +37,6 @@ def get_watched_number(url_string):
     driver.quit()
     return watched_by_number
 
-
 url = "https://letterboxd.com/victorvdb/list/letterboxd-500-most-watched-movies-of-all/"
 
 response = requests.get(url)
@@ -55,8 +54,7 @@ if response.status_code == 200:
             url_string = item.find("div", class_="really-lazy-load")["data-target-link"]
             watched_number = int(get_watched_number(url_string))
 
-            if watched_number >= 4000000:
+            if 4250000 <= watched_number < 5000000:
                 print(title + " - " + str(watched_number))
             else:
                 break
-

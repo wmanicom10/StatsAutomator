@@ -21,3 +21,4 @@ def print_decade_count(years, option):
         for decade, count in decades.items():
             if count:
                 print(f"{decade} ({count})")
+        print("")

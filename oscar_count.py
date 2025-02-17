@@ -2,7 +2,7 @@ import pandas as pd
 
 lists = pd.read_excel("spreadsheets/oscars.xlsx", dtype=str)
 
-def print_best_picture_count(box_office_titles, box_office_years):
+def print_best_picture_count(box_office_titles, box_office_years, option):
     best_picture_titles = list(lists["Best Picture Name"])
 
     best_picture_counter = 0
@@ -15,10 +15,13 @@ def print_best_picture_count(box_office_titles, box_office_years):
                 best_picture_counter += 1
 
     best_pictures_sorted = sorted(best_pictures, key=lambda x: x[1])
-    best_pictures_formatted = ', '.join(f"{title} ({year})" for title, year in best_pictures_sorted)
+    best_pictures_formatted = ', '.join(f"{title} ({int(year) + 1})" for title, year in best_pictures_sorted)
 
     print("Number of Best Picture Winners in the list: " + str(best_picture_counter))
-    print(best_pictures_formatted + "\n")
+    if option == 1:
+        print(best_pictures_formatted + "\n")
+    elif option == 4:
+        print(best_pictures_formatted)
 
 
 def print_best_animated_feature_count(box_office_titles, box_office_years):
@@ -34,7 +37,7 @@ def print_best_animated_feature_count(box_office_titles, box_office_years):
                 best_animated_feature_counter += 1
 
     best_animated_features_sorted = sorted(best_animated_features, key=lambda x: x[1])
-    best_animated_features_formatted = ', '.join(f"{title} ({year})" for title, year in best_animated_features_sorted)
+    best_animated_features_formatted = ', '.join(f"{title} ({int(year) + 1})" for title, year in best_animated_features_sorted)
 
     print("Number of Best Animated Feature Winners in the list: " + str(best_animated_feature_counter))
     print(best_animated_features_formatted + "\n")
@@ -63,3 +66,23 @@ def remove_articles(title):
             return title[len(article):]
     return title
 
+def print_best_director_count(titles, years):
+    best_director_titles = list(lists["Best Director Title"])
+    best_director_names = list(lists["Best Director Name"])
+
+    best_director_counter = 0
+    best_director = []
+
+    for i in range(len(titles)):
+        if titles[i] in best_director_titles:
+            index = best_director_titles.index(titles[i])
+            best_director_name = best_director_names[index]
+            if (titles[i], years[i]) not in best_director:
+                best_director.append((titles[i], years[i], best_director_name))
+                best_director_counter += 1
+
+    best_director_sorted = sorted(best_director, key=lambda x: x[1])
+    best_director_formatted = ', '.join(f"{name} ({title}, {int(year) + 1})" for title, year, name in best_director_sorted)
+
+    print("Number of Best Directors Winners: " + str(best_director_counter))
+    print(best_director_formatted)

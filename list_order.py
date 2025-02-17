@@ -2,7 +2,6 @@ import re
 from bs4 import BeautifulSoup
 import requests
 
-
 def print_list_order(option):
     url = ""
     highest_text = ""
@@ -58,12 +57,12 @@ def print_list_order(option):
 
                 highest_title = soup.find("meta", {"property": "og:title"})["content"]
                 print(highest_text)
-                if option == 1:
+                if option == 1 or option == 5:
                     highest_title = highest_title[0:len(highest_title) - 7]
                     highest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
                     highest_rating = highest_rating.split(" ")[0]
                     print(highest_title + " (" + highest_rating + ")\n")
-                elif option == 2 or option == 4:
+                elif option == 2 or option == 4 or option == 6:
                     print(highest_title + "\n")
                 elif option == 3:
                     highest_length = soup.find("p", class_="text-link text-footer")
