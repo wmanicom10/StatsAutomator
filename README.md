@@ -38,7 +38,23 @@ StatsAutomator/
 ├── print_top_50_2026.py                # 2026 box office output
 ├── print_top_100_all_time_worldwide.py # All-time box office output
 ├── year_count.py                       # Films per year
+└── spreadsheets/
+    ├── fivemillionwatchedclub.xlsx     # Five Million Watched Club data
+    ├── franchises.xlsx                 # Franchise data
+    ├── lists.xlsx                      # Box office, watched club, IMDb, Letterboxd data
+    └── oscars.xlsx                     # Oscar winners and nominees
 ```
+
+## Spreadsheets
+
+The `spreadsheets` folder contains the data files the project reads from. These need to be kept up to date manually.
+
+| File                          | Description                                                                                                                                              |
+|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `fivemillionwatchedclub.xlsx` | Films in the Five Million Watched Club with film data, milestone dates (premiere, theatrical release, 1M, 2M, 3M, 4M watches) and date added to the list |                              |                                                                                                                                               |
+| `franchises.xlsx`             | Franchise data from various franchises in the Top 100 Worldwide Box Office list                                                                          |
+| `lists.xlsx`                  | Box office data, plus data for the Letterboxd watched clubs, IMDb Top 250, and Letterboxd Top 500                                                        |
+| `oscars.xlsx`                 | Oscar winners and nominees for Best Picture, Best Animated Feature, Best Director, Best Actor, and Best Actress                                          |
 
 ## Getting Started
 
