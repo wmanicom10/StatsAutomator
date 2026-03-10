@@ -1,0 +1,25 @@
+def print_actor_count(option):
+    if option == 1:
+        print("Actors with 8+ films in the list")
+        print("Warwick Davis (12)")
+        print("Samuel L. Jackson (11)")
+        print("Andy Serkis (9)")
+        print("Benedict Cumberbatch (8)")
+        print("Robert Downey Jr. (8)")
+        print("Chris Evans (8)")
+        print("Scarlett Johansson (8)")
+        print("Chris Pratt (8)")
+        print("Alan Rickman (8)")
+        print("Alan Tudyk (8)")
+        print("Emma Watson (8)")
+        print("")
+    elif option == 2:
+        print("Actors with 3+ films in the list")
+        print("Natasha Lyonne (3)")
+        print("Bronwyn James (3)")
+        print("Mason Thames (3)")
+        print("Hannah Waddingham (3)")
+        print("")
+    elif option == 3:
+        print("Actors with 2+ films in the list")
+        print("")
