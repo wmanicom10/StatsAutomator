@@ -66,7 +66,7 @@ def print_best_picture_nominees(box_office_titles, box_office_years):
     best_pictures_sorted = sorted(best_picture_nominees, key=lambda x: remove_articles(x[0]))
 
     print("Best Picture Nominees in the list: ")
-    print(', '.join(best_pictures_sorted))
+    print(', '.join(best_pictures_sorted) + "\n")
 
 def remove_articles(title):
     articles = ("A ", "An ", "The ")

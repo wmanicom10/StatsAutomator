@@ -1,13 +1,41 @@
 import re
-import time
 from bs4 import BeautifulSoup
-import requests
+import cloudscraper
+import time
 
-headers = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                  "AppleWebKit/537.36 (KHTML, like Gecko) "
-                  "Chrome/115.0.0.0 Safari/537.36"
-}
+scraper = cloudscraper.create_scraper()
+
+def fetch_with_retry(url, retries=3, backoff=10):
+    for attempt in range(retries):
+        response = scraper.get(url)
+        if response.status_code == 200:
+            return response
+        elif response.status_code in (403, 429):
+            if attempt < retries - 1:
+                wait = backoff * (2 ** attempt)
+                print(f"Rate limited ({response.status_code}). Waiting {wait}s before retry...")
+                time.sleep(wait)
+            else:
+                print(f"Failed after {retries} attempts. Status code: {response.status_code}")
+                return None
+        else:
+            print(f"Error {response.status_code}")
+            return None
+
+def get_runtime_from_url(url):
+    response = fetch_with_retry(url)
+    if response is None:
+        return None, None
+    soup = BeautifulSoup(response.text, "html.parser")
+    title = soup.find("meta", {"property": "og:title"})["content"]
+    title = title[0:len(title) - 7]
+    length = soup.find("p", class_="text-link text-footer")
+    if length:
+        length_text = length.get_text(strip=True)
+        duration = re.search(r"\d+", length_text)
+        if duration:
+            return title, int(duration.group())
+    return title, None
 
 def print_list_order(option, titles=None):
     url = ""
@@ -70,92 +98,112 @@ def print_list_order(option, titles=None):
         highest_text += "Oldest film in the list"
         lowest_text += "Newest film in the list"
 
-    response = requests.get(url, headers=headers)
+    response = fetch_with_retry(url)
+    if response is None:
+        return
 
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.text, "html.parser")
-        ul = soup.find("ul", class_="poster-list")
+    soup = BeautifulSoup(response.text, "html.parser")
+    ul = soup.find("ul", class_="poster-list")
 
-        if ul:
-            items = ul.find_all("li")
+    if ul:
+        items = ul.find_all("li")
+        all_item_links = [item.find("div", class_="react-component")["data-item-link"] for item in items]
 
-            highest = items[0].find("div", class_="react-component")["data-item-link"]
-            lowest = items[len(items) - 1].find("div", class_="react-component")["data-item-link"]
+        highest_url = f"https://letterboxd.com{all_item_links[0]}"
+        lowest_url = f"https://letterboxd.com{all_item_links[-1]}"
 
-            highest_url = f"https://letterboxd.com{highest}"
-            lowest_url = f"https://letterboxd.com{lowest}"
+        # Handle longest/shortest with tie detection
+        if option in (3, 9, 13):
+            highest_title, highest_duration = get_runtime_from_url(highest_url)
+            lowest_title, lowest_duration = get_runtime_from_url(lowest_url)
 
-            highest_response = requests.get(highest_url)
-            lowest_response = requests.get(lowest_url)
+            if highest_duration is None or lowest_duration is None:
+                return
 
-            if highest_response.status_code == 200 and lowest_response.status_code == 200:
-                highest_html = highest_response.text
-                lowest_html = lowest_response.text
+            # Find all films tied for longest (list is sorted, scan from top until runtime changes)
+            longest_titles = [highest_title]
+            for link in all_item_links[1:]:
+                item_title, item_duration = get_runtime_from_url(f"https://letterboxd.com{link}")
+                if item_duration == highest_duration:
+                    longest_titles.append(item_title)
+                else:
+                    break
 
-                soup = BeautifulSoup(highest_html, "html.parser")
+            # Find all films tied for shortest (scan from bottom until runtime changes)
+            shortest_titles = [lowest_title]
+            for link in reversed(all_item_links[:-1]):
+                item_title, item_duration = get_runtime_from_url(f"https://letterboxd.com{link}")
+                if item_duration == lowest_duration:
+                    shortest_titles.append(item_title)
+                else:
+                    break
 
-                highest_title = soup.find("meta", {"property": "og:title"})["content"]
-                print(highest_text)
-                if option == 1 or option == 7 or option == 11:
-                    highest_title = highest_title[0:len(highest_title) - 7]
-                    highest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
-                    highest_rating = highest_rating.split(" ")[0]
-                    print(highest_title + " (" + highest_rating + ")\n")
-                elif option == 2 or option == 4 or option == 8 or option == 10 or option == 12 or option == 14:
-                    print(highest_title + "\n")
-                elif option == 3 or option == 9 or option == 13:
-                    highest_length = soup.find("p", class_="text-link text-footer")
-                    highest_length_text = highest_length.get_text(strip=True)
-                    duration = re.search(r"\d+", highest_length_text)
-                    if duration:
-                        highest_duration = duration.group()
-                    highest_title = highest_title[0:len(highest_title) - 7]
-                    formatted_duration = format_runtime(int(highest_duration))
-                    print(highest_title + " - " + formatted_duration + "\n")
-                elif option == 5:
-                    highest_title = highest_title[0:len(highest_title) - 7]
-                    highest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
-                    highest_rating = highest_rating.split(" ")[0]
-                    highest_title_index = len(titles) - titles.index(highest_title)
-                    print("#" + str(highest_title_index) + " " + highest_title + " (" + highest_rating + ")\n")
-                elif option == 6:
-                    highest_title_index = len(titles) - titles.index(highest_title[0:len(highest_title) - 7])
-                    print("#" + str(highest_title_index) + " " + highest_title + "\n")
-
-                soup = BeautifulSoup(lowest_html, "html.parser")
-
-                lowest_title = soup.find("meta", {"property": "og:title"})["content"]
-                print(lowest_text)
-                if option == 1 or option == 7 or option == 11:
-                    lowest_title = lowest_title[0:len(lowest_title) - 7]
-                    lowest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
-                    lowest_rating = lowest_rating.split(" ")[0]
-                    print(lowest_title + " (" + lowest_rating + ")\n")
-                elif option == 2 or option == 4 or option == 8 or option == 10 or option == 12 or option == 14:
-                    print(lowest_title + "\n")
-                elif option == 3 or option == 9 or option == 13:
-                    lowest_length = soup.find("p", class_="text-link text-footer")
-                    lowest_length_text = lowest_length.get_text(strip=True)
-                    duration = re.search(r"\d+", lowest_length_text)
-                    if duration:
-                        lowest_duration = duration.group()
-                    lowest_title = lowest_title[0:len(lowest_title) - 7]
-                    formatted_duration = format_runtime(int(lowest_duration))
-                    print(lowest_title + " - " + formatted_duration + "\n")
-                elif option == 5:
-                    lowest_title = lowest_title[0:len(lowest_title) - 7]
-                    lowest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
-                    lowest_rating = lowest_rating.split(" ")[0]
-                    lowest_title_index = len(titles) - titles.index(lowest_title)
-                    print("#" + str(lowest_title_index) + " " + lowest_title + " (" + lowest_rating + ")\n")
-                elif option == 6:
-                    lowest_title_index = len(titles) - titles.index(lowest_title[0:len(lowest_title) - 7])
-                    print("#" + str(lowest_title_index) + " " + lowest_title + "\n")
+            print(highest_text)
+            if len(longest_titles) > 1:
+                print(", ".join(longest_titles) + " - " + format_runtime(highest_duration) + "\n")
             else:
-                print(highest_response.status_code)
-                print(lowest_response.status_code)
+                print(highest_title + " - " + format_runtime(highest_duration) + "\n")
+
+            print(lowest_text)
+            if len(shortest_titles) > 1:
+                print(", ".join(shortest_titles) + " - " + format_runtime(lowest_duration) + "\n")
+            else:
+                print(lowest_title + " - " + format_runtime(lowest_duration) + "\n")
+
+            return
+
+        highest_response = fetch_with_retry(highest_url)
+        lowest_response = fetch_with_retry(lowest_url)
+
+        if highest_response is None or lowest_response is None:
+            return
+
+        highest_html = highest_response.text
+        lowest_html = lowest_response.text
+
+        soup = BeautifulSoup(highest_html, "html.parser")
+
+        highest_title = soup.find("meta", {"property": "og:title"})["content"]
+        print(highest_text)
+        if option == 1 or option == 7 or option == 11:
+            highest_title = highest_title[0:len(highest_title) - 7]
+            highest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
+            highest_rating = highest_rating.split(" ")[0]
+            print(highest_title + " (" + highest_rating + ")\n")
+        elif option == 2 or option == 4 or option == 8 or option == 10 or option == 12 or option == 14:
+            print(highest_title + "\n")
+        elif option == 5:
+            highest_title = highest_title[0:len(highest_title) - 7]
+            highest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
+            highest_rating = highest_rating.split(" ")[0]
+            highest_title_index = len(titles) - titles.index(highest_title)
+            print("#" + str(highest_title_index) + " " + highest_title + " (" + highest_rating + ")\n")
+        elif option == 6:
+            highest_title_index = len(titles) - titles.index(highest_title[0:len(highest_title) - 7])
+            print("#" + str(highest_title_index) + " " + highest_title + "\n")
+
+        soup = BeautifulSoup(lowest_html, "html.parser")
+
+        lowest_title = soup.find("meta", {"property": "og:title"})["content"]
+        print(lowest_text)
+        if option == 1 or option == 7 or option == 11:
+            lowest_title = lowest_title[0:len(lowest_title) - 7]
+            lowest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
+            lowest_rating = lowest_rating.split(" ")[0]
+            print(lowest_title + " (" + lowest_rating + ")\n")
+        elif option == 2 or option == 4 or option == 8 or option == 10 or option == 12 or option == 14:
+            print(lowest_title + "\n")
+        elif option == 5:
+            lowest_title = lowest_title[0:len(lowest_title) - 7]
+            lowest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
+            lowest_rating = lowest_rating.split(" ")[0]
+            lowest_title_index = len(titles) - titles.index(lowest_title)
+            print("#" + str(lowest_title_index) + " " + lowest_title + " (" + lowest_rating + ")\n")
+        elif option == 6:
+            lowest_title_index = len(titles) - titles.index(lowest_title[0:len(lowest_title) - 7])
+            print("#" + str(lowest_title_index) + " " + lowest_title + "\n")
     else:
-        print(response.status_code)
+        print("Could not find poster list on page")
 
 def format_runtime(minutes):
     hours, mins = divmod(int(minutes), 60)

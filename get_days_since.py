@@ -2,8 +2,6 @@ from datetime import datetime
 
 today = datetime(2025, 8, 1)
 
-# The Truman Show
-
 # Premiere to 5M
 premiere_date = datetime(2019, 8, 31)
 premiere_date_since = (today - premiere_date).days

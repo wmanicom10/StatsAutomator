@@ -44,13 +44,16 @@ def print_director_count(lists, option):
         director_counts = Counter(five_million_directors_separated)
         sorted_directors = sorted(
             director_counts.items(),
-            key=lambda x: (-x[1], x[0].split()[-1])
+            key=lambda x: (-x[1], x[0].split()[-1], x[0].split()[0])
         )
 
+        directors_output = [sorted_directors[i][0] + " (" + str(sorted_directors[i][1]) + ")" for i in
+                            range(len(sorted_directors)) if sorted_directors[i][1] >= 2]
         print("Directors with 2+ films in the list")
-        for i in range(len(sorted_directors)):
-            if sorted_directors[i][1] >= 2:
-                print(sorted_directors[i][0] + " (" + str(sorted_directors[i][1]) + ")")
-            else:
-                break
+        print(", ".join(directors_output))
+        print("")
+
+    if option == 3:
+        print("Directors with 2+ films in the list")
+        print("Ric Roman Waugh (2)")
         print("")
