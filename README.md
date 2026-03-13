@@ -17,7 +17,8 @@ For each list, the tool scrapes Letterboxd and cross-references spreadsheet data
 
 ```
 StatsAutomator/
-├── main.py                             # Entry point
+├── app.py                              # Streamlit web GUI
+├── main.py                             # CLI entry point
 ├── actor_count.py                      # Actor counts per list
 ├── billion_count.py                    # Scrapes $1B/$2B film counts
 ├── decade_count.py                     # Films per decade
@@ -60,15 +61,25 @@ The `spreadsheets` folder contains the data files the project reads from. These 
 
 Install dependencies:
 ```bash
-pip install pandas openpyxl requests beautifulsoup4 cloudscraper
+pip install pandas openpyxl requests beautifulsoup4 cloudscraper streamlit
 ```
 
-### Running
-
+## Running
+ 
+### Web GUI
+ 
+```bash
+streamlit run app.py
+```
+ 
+This opens a browser window with a tab for each list. Click **Load Stats** on any tab to fetch and display the stats for that list.
+ 
+### Command Line
+ 
 ```bash
 python main.py
 ```
-
+ 
 You'll be prompted to select a list:
 ```
 Which list would you like?
@@ -78,7 +89,7 @@ Which list would you like?
 4. Letterboxd Five Million Watched Club
 Enter an option:
 ```
-
+ 
 The output is printed directly to the console.
 
 ## Notes
