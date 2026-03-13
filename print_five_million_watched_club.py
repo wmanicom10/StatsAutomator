@@ -38,4 +38,4 @@ def print_five_million_watched_club():
     print_best_actress_count(titles, years)
     print_best_animated_feature_count(titles, years, 2)
     print_list_growth(dates_added)
-    print("Other Clubs\nOne Million Watched Club\nTwo Million Watched Club\nThree Million Watched Club\nFour Million Watched Club\nSix Million Watched Club")
+    print("Other Clubs\nOne Million Watched Club\nTwo Million Watched Club\nThree Million Watched Club\nFour Million Watched Club\nSix Million Watched Club\nSeven Million Watched Club")

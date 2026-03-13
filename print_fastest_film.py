@@ -1,3 +1,6 @@
+import math
+
+
 def print_fastest_film(fivemillionwatchedclub):
     titles = list(fivemillionwatchedclub["Title"])
     premiere_days = list(fivemillionwatchedclub["Premiere to 5M"])
@@ -24,6 +27,15 @@ def print_fastest_film(fivemillionwatchedclub):
         fastest_index = 0
 
         for i in range(len(days_list)):
+            try:
+                days_list[i] = int(float(days_list[i]))
+            except (ValueError, TypeError):
+                days_list[i] = 999999
+                continue
+
+            if math.isnan(days_list[i]):
+                days_list[i] = 999999
+
             if int(days_list[i]) < fastest_days:
                 fastest_days = int(days_list[i])
                 fastest_index = i
