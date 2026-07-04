@@ -1,8 +1,10 @@
 def print_decade_count(years, option):
-    decades = {"1990s": 0, "2000s": 0, "2010s": 0, "2020s": 0}
+    decades = {"1980s": 0, "1990s": 0, "2000s": 0, "2010s": 0, "2020s": 0}
 
     for year in map(int, years):
-        if 1990 <= year <= 1999:
+        if 1980 <= year <= 1989:
+            decades["1980s"] += 1
+        elif 1990 <= year <= 1999:
             decades["1990s"] += 1
         elif 2000 <= year <= 2009:
             decades["2000s"] += 1

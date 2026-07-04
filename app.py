@@ -17,7 +17,7 @@ from print_top_50_2025 import print_top_50_2025
 from print_top_50_2026 import print_top_50_2026
 from print_five_million_watched_club import print_five_million_watched_club
 
-st.set_page_config(page_title="Box Office Stats", page_icon="🎬", layout="wide")
+st.set_page_config(page_title="Stats Automator", page_icon="🎬", layout="wide")
 st.title("Stats Automator")
 
 tab1, tab2, tab3, tab4 = st.tabs([
