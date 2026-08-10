@@ -48,7 +48,7 @@ StatsAutomator/
 
 ## Spreadsheets
 
-The `spreadsheets` folder contains the data files the project reads from. These need to be kept up to date manually.
+The `spreadsheets` folder contains the data files the project reads from, which are manually updated.
 
 | File                          | Description                                                                                                                                              |
 |-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -56,41 +56,6 @@ The `spreadsheets` folder contains the data files the project reads from. These 
 | `franchises.xlsx`             | Franchise data from various franchises in the Top 100 Worldwide Box Office list                                                                          |
 | `lists.xlsx`                  | Box office data, plus data for the Letterboxd watched clubs, IMDb Top 250, and Letterboxd Top 500                                                        |
 | `oscars.xlsx`                 | Oscar winners and nominees for Best Picture, Best Animated Feature, Best Director, Best Actor, and Best Actress                                          |
-
-## Getting Started
-
-Install dependencies:
-```bash
-pip install pandas openpyxl requests beautifulsoup4 cloudscraper streamlit
-```
-
-## Running
- 
-### Web GUI
- 
-```bash
-streamlit run app.py
-```
- 
-This opens a browser window with a tab for each list. Click **Load Stats** on any tab to fetch and display the stats for that list.
- 
-### Command Line
- 
-```bash
-python main.py
-```
- 
-You'll be prompted to select a list:
-```
-Which list would you like?
-1. Top 100 All-Time Worldwide
-2. Top 50 2025
-3. Top 50 2026
-4. Letterboxd Five Million Watched Club
-Enter an option:
-```
- 
-The output is printed directly to the console.
 
 ## Notes
 

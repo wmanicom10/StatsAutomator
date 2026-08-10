@@ -36,6 +36,11 @@ def print_list_count(lists, box_office_titles, box_office_years, option):
                 "years": list(lists["Seven Million Year"]),
                 "count": 0
             },
+            "eight_million": {
+                "titles": list(lists["Eight Million Title"]),
+                "years": list(lists["Eight Million Year"]),
+                "count": 0
+            },
             "imdb": {
                 "titles": list(lists["IMDb Title"]),
                 "years": list(lists["IMDb Year"]),
@@ -69,10 +74,11 @@ def print_list_count(lists, box_office_titles, box_office_years, option):
         print("Number of films in the Letterboxd Five Million Watched Club: " + str(lists_dict["five_million"]["count"]))
         print("Number of films in the Letterboxd Six Million Watched Club: " + str(lists_dict["six_million"]["count"]))
         print("Number of films in the Letterboxd Seven Million Watched Club: " + str(lists_dict["seven_million"]["count"]))
-        if option == 2 or option == 3:
-            print("Number of films in the Top 100 All-Time Worldwide Box Office List: " + str(lists_dict["box_office"]["count"]))
+        print("Number of films in the Letterboxd Eight Million Watched CLub: " + str(lists_dict["eight_million"]["count"]))
         print("Number of films in the IMDb Top 250: " + str(lists_dict["imdb"]["count"]))
         print("Number of films in the Letterboxd Top 500: " + str(lists_dict["letterboxd"]["count"]) + "\n")
+        if option == 2 or option == 3:
+            print("Number of films in the Top 100 All-Time Worldwide Box Office List: " + str(lists_dict["box_office"]["count"]) + "\n")
     elif option == 4:
         lists_dict = {
             "letterboxd": {

@@ -140,15 +140,15 @@ def print_list_order(option, titles=None):
 
             print(highest_text)
             if len(longest_titles) > 1:
-                print(", ".join(longest_titles) + " - " + format_runtime(highest_duration) + "\n")
+                print(", ".join(longest_titles) + " (" + format_runtime(highest_duration) + ")\n")
             else:
-                print(highest_title + " - " + format_runtime(highest_duration) + "\n")
+                print(highest_title + " (" + format_runtime(highest_duration) + ")\n")
 
             print(lowest_text)
             if len(shortest_titles) > 1:
-                print(", ".join(shortest_titles) + " - " + format_runtime(lowest_duration) + "\n")
+                print(", ".join(shortest_titles) + " (" + format_runtime(lowest_duration) + ")\n")
             else:
-                print(lowest_title + " - " + format_runtime(lowest_duration) + "\n")
+                print(lowest_title + " (" + format_runtime(lowest_duration) + ")\n")
 
             return
 

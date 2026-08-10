@@ -351,39 +351,25 @@ def update_spreadsheet(excel_path, scraped_data, target_date=None):
 if __name__ == "__main__":
     EXCEL_PATH = "/Users/willmanicom/Documents/Misc/movies/movies.xlsx"
 
-    # https://letterboxd.com/victorvdb/list/letterboxd-500-most-watched-movies-of-all/
-
     films = [
         "https://letterboxd.com/film/interstellar/",
         "https://letterboxd.com/film/fight-club/",
         "https://letterboxd.com/film/barbie/",
-        "https://letterboxd.com/film/avatar/",
-        "https://letterboxd.com/film/shrek/",
-        "https://letterboxd.com/film/se7en/",
-        "https://letterboxd.com/film/shutter-island/",
-        "https://letterboxd.com/film/dead-poets-society/",
-        "https://letterboxd.com/film/eternal-sunshine-of-the-spotless-mind/",
-        "https://letterboxd.com/film/coco-2017/",
+
         "https://letterboxd.com/film/walle/",
         "https://letterboxd.com/film/finding-nemo/",
-        "https://letterboxd.com/film/black-panther/",
-        "https://letterboxd.com/film/toy-story/",
-        "https://letterboxd.com/film/spider-man-across-the-spider-verse/",
-        "https://letterboxd.com/film/the-shining/",
-        "https://letterboxd.com/film/django-unchained/",
         "https://letterboxd.com/film/kill-bill-vol-1/",
-        "https://letterboxd.com/film/the-devil-wears-prada/",
+        "https://letterboxd.com/film/the-perks-of-being-a-wallflower/",
+        "https://letterboxd.com/film/black-panther/",
         "https://letterboxd.com/film/the-avengers-2012/",
         "https://letterboxd.com/film/the-lord-of-the-rings-the-fellowship-of-the-ring/",
+        "https://letterboxd.com/film/django-unchained/",
+        "https://letterboxd.com/film/the-shining/",
         "https://letterboxd.com/film/monsters-inc/",
-        "https://letterboxd.com/film/the-perks-of-being-a-wallflower/",
-        "https://letterboxd.com/film/deadpool/",
-        "https://letterboxd.com/film/the-matrix/",
-        "https://letterboxd.com/film/spider-man-homecoming/",
-        "https://letterboxd.com/film/baby-driver/",
-        "https://letterboxd.com/film/back-to-the-future/",
-        "https://letterboxd.com/film/the-incredibles/",
-        "https://letterboxd.com/film/good-will-hunting/"
+        "https://letterboxd.com/film/the-odyssey-2026/",
+        "https://letterboxd.com/film/obsession-2025/",
+        "https://letterboxd.com/film/project-hail-mary/",
+        "https://letterboxd.com/film/spider-man-brand-new-day/"
     ]
 
     print("LETTERBOXD WATCH COUNT SCRAPER")

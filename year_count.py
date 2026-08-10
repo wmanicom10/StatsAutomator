@@ -7,7 +7,6 @@ def print_year_count(box_office_years):
     sorted_year_counts = sorted(year_counts.items(), key=lambda x: (-x[1], -int(x[0])))
 
     print("Years with 6+ films in the list")
-    for year, count in sorted_year_counts:
-        if count >= 6:
-            print(f"{year} ({count})")
+    qualifying = [f"{year} ({count})" for year, count in sorted_year_counts if count >= 6]
+    print(", ".join(qualifying))
     print("")

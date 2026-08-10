@@ -21,11 +21,13 @@ def print_director_count(lists, option):
         )
 
         print("Directors with 3+ films in the list")
+        qualifying = []
         for i in range(len(sorted_directors)):
             if sorted_directors[i][1] >= 3:
-                print(sorted_directors[i][0] + " (" + str(sorted_directors[i][1]) + ")")
+                qualifying.append(sorted_directors[i][0] + " (" + str(sorted_directors[i][1]) + ")")
             else:
                 break
+        print(", ".join(qualifying))
         print("")
 
     if option == 2:
@@ -55,5 +57,4 @@ def print_director_count(lists, option):
 
     if option == 3:
         print("Directors with 2+ films in the list")
-        print("Ric Roman Waugh (2)")
         print("")

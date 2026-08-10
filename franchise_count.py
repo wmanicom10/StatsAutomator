@@ -18,7 +18,6 @@ def print_franchise_count(box_office_titles):
     )
 
     print("Franchises with 5+ films in the list")
-    for franchise, count in sorted_franchise_counts.items():
-        if count >= 5:
-            print(f"{franchise} ({count})")
+    qualifying = [f"{franchise} ({count})" for franchise, count in sorted_franchise_counts.items() if count >= 5]
+    print(", ".join(qualifying))
     print("")

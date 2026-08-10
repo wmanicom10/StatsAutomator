@@ -14,9 +14,9 @@ def print_decade_count(years, option):
             decades["2020s"] += 1
 
     if option == 1:
-        print("Films in the list per decade")
-        for decade, count in decades.items():
-            print(f"{decade} - {count}")
+        print("Number of films per decade")
+        entries = [f"{decade} ({count})" for decade, count in decades.items() if count > 0]
+        print(", ".join(entries))
         print()
     elif option == 2:
         print("Number Of Films Per Decade:")

@@ -47,8 +47,5 @@ def print_billion_count(option):
             num_of_one_billion += box_office_value >= 1_000_000_000
             num_of_two_billion += box_office_value >= 2_000_000_000
 
-    if option == 1:
-        print(f"Number of $1 billion films: {num_of_one_billion}")
-        print(f"Number of $2 billion films: {num_of_two_billion}\n")
-    if option == 2:
-        print(f"Number of $1 billion films: {num_of_one_billion}\n")
+    print(f"Number of $1 billion films: {num_of_one_billion}\n")
+    print(f"Number of $2 billion films: {num_of_two_billion}\n")
