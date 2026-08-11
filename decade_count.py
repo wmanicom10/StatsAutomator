@@ -19,7 +19,7 @@ def print_decade_count(years, option):
         print(", ".join(entries))
         print()
     elif option == 2:
-        print("Number Of Films Per Decade:")
+        print("Number of Films Per Decade:")
         decade_output = [f"{decade} ({count})" for decade, count in decades.items() if count]
         print(", ".join(decade_output))
         print("")

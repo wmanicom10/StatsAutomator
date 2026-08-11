@@ -12,6 +12,7 @@ For each list, the tool scrapes Letterboxd and cross-references spreadsheet data
 2. **Top 50 2025 Worldwide Box Office** — https://boxd.it/Nefn0
 3. **Top 50 2026 Worldwide Box Office** — https://boxd.it/RG9tI
 4. **Letterboxd Five Million Watched Club** - https://boxd.it/DY2Eu
+5. **$2 Billion Club** - https://boxd.it/Wvngw
 
 ## Project Structure
 
@@ -43,7 +44,8 @@ StatsAutomator/
     ├── fivemillionwatchedclub.xlsx     # Five Million Watched Club data
     ├── franchises.xlsx                 # Franchise data
     ├── lists.xlsx                      # Box office, watched club, IMDb, Letterboxd data
-    └── oscars.xlsx                     # Oscar winners and nominees
+    ├── oscars.xlsx                     # Oscar winners and nominees
+    └── twobillionclub.xlsx             # $2 Billion Club data
 ```
 
 ## Spreadsheets
@@ -56,6 +58,7 @@ The `spreadsheets` folder contains the data files the project reads from, which 
 | `franchises.xlsx`             | Franchise data from various franchises in the Top 100 Worldwide Box Office list                                                                          |
 | `lists.xlsx`                  | Box office data, plus data for the Letterboxd watched clubs, IMDb Top 250, and Letterboxd Top 500                                                        |
 | `oscars.xlsx`                 | Oscar winners and nominees for Best Picture, Best Animated Feature, Best Director, Best Actor, and Best Actress                                          |
+| `twobillionclub.xlsx`         | Films in the $2 Billion Club with film data and date added to the list                                                                                   |
 
 ## Notes
 

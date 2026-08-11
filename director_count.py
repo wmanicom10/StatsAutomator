@@ -58,3 +58,28 @@ def print_director_count(lists, option):
     if option == 3:
         print("Directors with 2+ films in the list")
         print("")
+
+    if option == 4:
+        two_billion_directors = lists
+        two_billion_directors_separated = []
+
+        for i in range(len(two_billion_directors)):
+            if isinstance(two_billion_directors[i], str):
+                director = two_billion_directors[i]
+                if ',' in director:
+                    names = [name.strip() for name in director.split(',')]
+                    two_billion_directors_separated.extend(names)
+                else:
+                    two_billion_directors_separated.append(director)
+
+        director_counts = Counter(two_billion_directors_separated)
+        sorted_directors = sorted(
+            director_counts.items(),
+            key=lambda x: (-x[1], x[0].split()[-1], x[0].split()[0])
+        )
+
+        directors_output = [sorted_directors[i][0] + " (" + str(sorted_directors[i][1]) + ")" for i in
+                            range(len(sorted_directors)) if sorted_directors[i][1] >= 2]
+        print("Directors with 2+ films in the list")
+        print(", ".join(directors_output))
+        print("")

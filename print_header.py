@@ -17,9 +17,16 @@ def print_header(option):
     elif option == 4:
         print("\n2026 Worldwide Box Office - Top 50\n")
         print("This is a list of the Top 50 Worldwide Box Office films in 2026, based on The Numbers. Updated weekly.\n")
+    elif option == 5:
+        print("\n$2 Billion Club\n")
+        print("This is a list of films to gross at least $2 billion at the worldwide box office, based on The Numbers.\n")
+        print("Inspired by Léo Barbosa's $1 Billion Club\n")
 
     formatted_date = datetime.now().strftime("%m/%d/%y")
     print("Last Update - " + formatted_date + "\n")
+
+    if option == 5:
+        return
 
     print("--------------------------------------------------------------------------------------------------------------------")
 

@@ -7,6 +7,9 @@ scraper = cloudscraper.create_scraper()
 
 def fetch_with_retry(url, retries=3, backoff=10):
     for attempt in range(retries):
+        if not url:
+            print(f"WARNING: empty URL received, skipping")
+            return None
         response = scraper.get(url)
         if response.status_code == 200:
             return response
@@ -97,6 +100,14 @@ def print_list_order(option, titles=None):
         url += "https://letterboxd.com/will1011/list/2026-worldwide-box-office-top-50/by/release-earliest/"
         highest_text += "Oldest film in the list"
         lowest_text += "Newest film in the list"
+    elif option == 15:
+        url += "https://letterboxd.com/will1011/list/2-billion-club/by/rating/"
+        highest_text += "Highest rated film in the list"
+        lowest_text += "Lowest rated film in the list"
+    elif option == 16:
+        url += "https://letterboxd.com/will1011/list/2-billion-club/by/popular/"
+        highest_text += "Most popular film in the list"
+        lowest_text += "Least popular film in the list"
 
     response = fetch_with_retry(url)
     if response is None:
@@ -165,12 +176,12 @@ def print_list_order(option, titles=None):
 
         highest_title = soup.find("meta", {"property": "og:title"})["content"]
         print(highest_text)
-        if option == 1 or option == 7 or option == 11:
+        if option == 1 or option == 7 or option == 11 or option == 15:
             highest_title = highest_title[0:len(highest_title) - 7]
             highest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
             highest_rating = highest_rating.split(" ")[0]
             print(highest_title + " (" + highest_rating + ")\n")
-        elif option == 2 or option == 4 or option == 8 or option == 10 or option == 12 or option == 14:
+        elif option == 2 or option == 4 or option == 8 or option == 10 or option == 12 or option == 14 or option == 16:
             print(highest_title + "\n")
         elif option == 5:
             highest_title = highest_title[0:len(highest_title) - 7]
@@ -186,12 +197,12 @@ def print_list_order(option, titles=None):
 
         lowest_title = soup.find("meta", {"property": "og:title"})["content"]
         print(lowest_text)
-        if option == 1 or option == 7 or option == 11:
+        if option == 1 or option == 7 or option == 11 or option == 15:
             lowest_title = lowest_title[0:len(lowest_title) - 7]
             lowest_rating = soup.find("meta", {"name": "twitter:data2"})["content"]
             lowest_rating = lowest_rating.split(" ")[0]
             print(lowest_title + " (" + lowest_rating + ")\n")
-        elif option == 2 or option == 4 or option == 8 or option == 10 or option == 12 or option == 14:
+        elif option == 2 or option == 4 or option == 8 or option == 10 or option == 12 or option == 14 or option == 16:
             print(lowest_title + "\n")
         elif option == 5:
             lowest_title = lowest_title[0:len(lowest_title) - 7]

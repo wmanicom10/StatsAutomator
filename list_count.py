@@ -1,5 +1,5 @@
 def print_list_count(lists, box_office_titles, box_office_years, option):
-    if option != 4:
+    if option != 4 and option != 10:
         lists_dict = {
             "one_million": {
                 "titles": list(lists["One Million Title"]),
@@ -110,4 +110,36 @@ def print_list_count(lists, box_office_titles, box_office_years, option):
         print("Number of films in the Letterboxd Top 500: " + str(lists_dict["letterboxd"]["count"]))
         print("Number of films in the IMDb Top 250: " + str(lists_dict["imdb"]["count"]))
         print("Number of films in the All-Time Worldwide Box Office List: " + str(lists_dict["box_office"]["count"]))
+    elif option == 10:
+        lists_dict = {
+            "one_million": {
+                "titles": list(lists["One Million Title"]),
+                "years": list(lists["One Million Year"]),
+                "count": 0
+            },
+            "letterboxd": {
+                "titles": list(lists["Letterboxd Title"]),
+                "years": list(lists["Letterboxd Year"]),
+                "count": 0,
+            },
+            "imdb": {
+                "titles": list(lists["IMDb Title"]),
+                "years": list(lists["IMDb Year"]),
+                "count": 0,
+            }
+        }
 
+        for i in range(len(box_office_titles)):
+            for key, value in lists_dict.items():
+                titles = value["titles"]
+                years = value["years"]
+                if len(titles) == len(years):
+                    for j in range(len(titles)):
+                        if box_office_titles[i] == titles[j] and box_office_years[i] == years[j]:
+                            value["count"] += 1
+
+        total = len(box_office_titles)
+
+        print(f"Films in the Letterboxd One Million Watched Club: {lists_dict['one_million']['count']}/{total}")
+        print(f"Films in the Letterboxd Top 500: {lists_dict['letterboxd']['count']}/{total}")
+        print(f"Films in the IMDb Top 250: {lists_dict['imdb']['count']}/{total}\n")

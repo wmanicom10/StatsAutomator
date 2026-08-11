@@ -1,14 +1,14 @@
 from datetime import datetime
 
-today = datetime(2026, 8, 6)
+today = datetime(2018, 6, 11)
 
 # Premiere to 5M
-premiere_date = datetime(2006, 6, 19)
+premiere_date = datetime(2018, 4, 23)
 premiere_date_since = (today - premiere_date).days
 print("Premiere to 5M - " + str(premiere_date_since + 1))
 
 # Theatrical to 5M
-theatrical_date = datetime(2006, 6, 29)
+theatrical_date = datetime(2018, 4, 25)
 theatrical_date_since = (today - theatrical_date).days
 print("Theatrical to 5M - " + str(theatrical_date_since + 1))
 
